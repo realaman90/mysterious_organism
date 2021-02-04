@@ -57,9 +57,8 @@ const pAequorFactory = (specimenNum, dna) => {
    },
    willLikelySurvive(){
      let count = 0;
-     for(let i = 0; i < this.dna.length; i++){
-       let x = this.dna[i];
-       if(x === 'C' || x === 'G'){
+     for(let x of this.dna){
+        if(x === 'C' || x === 'G'){
          count++;
        }
      }
@@ -74,8 +73,8 @@ const pAequorFactory = (specimenNum, dna) => {
    },
    complementStrand(){
     let complementingStrand = [];
-      for (let i = 0; i < this.dna.length; i++) {
-        switch (this.dna[i]) {
+      for (let x of this.dna) {
+        switch (x) {
           case 'A':
             complementingStrand.push('T');
             break;
@@ -99,21 +98,17 @@ const pAequorFactory = (specimenNum, dna) => {
 
 }
 const dna = mockUpStrand();
-generateSamples = ()  => {
-  const pAequorSamples = [];
-  let i = 0;
-  let x = pAequorFactory(i,dna);
-   while(i<=29){
-    let x = pAequorFactory(i,dna);
-    if(x.willLikelySurvive() === true){
-      pAequorSamples.push(x);
-      i++;
-    }
+// console.log(pAequorFactory(1,dna).willLikelySurvive())
+
+const pAequorSamples = [];
+let count= 1;
+while(pAequorSamples.length < 30){
+  let x = pAequorFactory(count,dna);
+  if(x.willLikelySurvive() === true){
+    pAequorSamples.push(x);
+    count ++;
   }
-  return pAequorSamples;
+}
 
-} 
-const thirtySamples = generateSamples();
-
-console.log (thirtySamples.length);
+console.log (pAequorSamples.length);
 
